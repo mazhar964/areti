@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening Aretí App...</title>
     <script>
         window.onload = function() {
-            // 1. Grab the trainer ID from the WhatsApp link
             const urlParams = new URLSearchParams(window.location.search);
-            const trainerId = urlParams.get('id');
+            const trainerId = urlParams.get('id') || '';
 
-            if (trainerId) {
-                // 2. Force open your working app scheme with the ID
-                window.location.href = "aretiapp://aretiapp.com/linkRouter?id=" + trainerId;
-            } else {
-                // 3. Fallback to Play Store if no ID is found
-                window.location.href = "https://play.google.com/store/apps/details?id=com.wollabo.Areti";
-            }
+            // 1. Try to open the app directly using your custom scheme
+            window.location.href = "aretiapp://aretiapp.com/linkRouter?id=" + trainerId;
+
+            // 2. Fallback timeout: If the app isn't installed, route to the correct store after 1.5 seconds
+            setTimeout(function() {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    // Authentic iOS App Store link for Aretí
+                    window.location.href = "https://apps.apple.com/us/app/aret%C3%AD/id1547298602";
+                } else {
+                    // Authentic Android Play Store link for Areti
+                    window.location.href = "https://play.google.com/store/apps/details?id=com.wollabo.Areti&pcampaignid=web_share";
+                }
+            }, 1500);
         };
     </script>
 </head>
-<body>
-    <p style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-        Opening Areti Fitness App...
-    </p>
+<body style="margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f9f9f9; color: #333;">
+    <div style="text-align: center;">
+        <h2 style="font-size: 20px; margin-bottom: 8px;">Opening Aretí App...</h2>
+        <p style="font-size: 14px; color: #666;">If the app doesn't open automatically, we are redirecting you to the app store.</p>
+    </div>
 </body>
 </html>
