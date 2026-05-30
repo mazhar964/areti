@@ -1,1 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            // 1. Grab the trainer ID from the WhatsApp link
+            const urlParams = new URLSearchParams(window.location.search);
+            const trainerId = urlParams.get('id');
 
+            if (trainerId) {
+                // 2. Force open your working app scheme with the ID
+                window.location.href = "aretiapp://aretiapp.com/linkRouter?id=" + trainerId;
+            } else {
+                // 3. Fallback to Play Store if no ID is found
+                window.location.href = "https://play.google.com/store/apps/details?id=com.wollabo.Areti";
+            }
+        };
+    </script>
+</head>
+<body>
+    <p style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+        Opening Areti Fitness App...
+    </p>
+</body>
+</html>
