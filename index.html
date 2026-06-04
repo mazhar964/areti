@@ -9,7 +9,7 @@
             const trainerId = urlParams.get('id') || '';
 
             // 1. Try to open the app directly using your custom scheme
-            window.location.href = "aretiapp://aretiapp.com/linkRouter?id=" + trainerId;
+            window.location.href = "aretiapp://aretiapp.com/trainerProfilePageCopy?id=" + trainerId;
 
             // 2. Fallback timeout: If the app isn't installed, route to the correct store after 1.5 seconds
             setTimeout(function() {
